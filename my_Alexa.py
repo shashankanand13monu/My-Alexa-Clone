@@ -35,7 +35,9 @@ def wishMe():
 
     print(do_list)
     speak("Hi, I am Alexa  and here's a List of things you can do with me Try Saying Something")
-    
+
+#-------------------------------------------------------------------------------------------------#
+
 chrome_path="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" #CHANGE ACC. TO NEED
 webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path),preferred=True)
 wb= webbrowser.get('chrome')
@@ -44,9 +46,12 @@ open_code= "C:\\Users\\KIIT\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.e
 music_dir = r"C:\Users\KIIT\Desktop\Apps\Project\My Alexa Assistant\Music" #r-> Spaces in b/w or use C:\\xx\\xx
 songs = os.listdir(music_dir)
 
+#-------------------------------------------------------------------------------------------------#
+
 do_list= '''
 Play Music
-Open Youtube 
+Open Youtube
+Play "Shape of You" On youtube 
 Send Email
 what is the time
 Search on web
@@ -56,7 +61,7 @@ Alexa Quit '''
 def takeCommand(): # mICROPHONE iNPUT->sTRING oUTPUT
     
     r= sr.Recognizer()
-    with sr.Microphone() as source:
+    with sr.Microphone() as source: #"""Recognizes the audio and sends it for display to displayText."""
         speak("Listening...")
         r.pause_threshold=1 #Gap between speaking
         audio= r.listen(source)  
@@ -72,13 +77,14 @@ def takeCommand(): # mICROPHONE iNPUT->sTRING oUTPUT
         return "NONE"
     return query    
 #-------------------------------------------------------------------------------#        
-
+# Simple Mail Transfer Protocol (SMTP) is a protocol, 
+# which handles sending e-mail and routing e-mail between mail servers.
 def sendEmail(to,content):
-    server = smtplib.SMTP('smtp.gmail.com',587) #Must enable/allow less secure apps in gmail
+    server = smtplib.SMTP('smtp.gmail.com',587) #Must enable/allow less secure apps settings in gmail
     server.ehlo()
-    server.starttls()
+    server.starttls() # start TLS for security -> Transport Layer Security (TLS) is the successor protocol to SSL. TLS is an improved version of SSL
     server.login('youremail@gmail.com','your-passward')
-    server.sendmail('sample@gmail.com',to,content)
+    server.sendmail('youremail@gmail.com',to,content)
     server.close()
 #---------------------------------------------------------------------------------#
 
@@ -126,6 +132,9 @@ if __name__ == '__main__':
                 
         elif 'quit' in query:
             speak("goodbye , have a nice day and thanks for using me")
+            exit()
+        elif 'on youtube' in query:
+            kt.playonyt(query)
             exit()
         elif 'search' in query:
             speak("I Have found this on Google")
