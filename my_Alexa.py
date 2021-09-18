@@ -8,7 +8,7 @@ import os
 import smtplib
 from wikipedia import exceptions
 import pywhatkit as kt #For searching
-#------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------------------------------------##
 
 engine= pyttsx3.init('sapi5') # init function to get & load an engine instance for the speech synthesis 
 voices = engine.getProperty('voices') # voice is provided by ms-sapi5 
